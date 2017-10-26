@@ -4,26 +4,10 @@ var http = require('http')
 var MongoClient = require('mongodb').MongoClient;
 var DB_CONN_STR = 'mongodb://localhost:27017/netease'; //数据库为 netease
 
-// var targetOptions = {
-// 	host:randomProxyHost(),
-// 	port:"80",
-// 	method:"GET",
-//     path:"http://music.163.com/#/song?id=5188759"
-// };
-
-// console.log(targetOptions.host);
-// var req = http.request(targetOptions, function (res) {
-// 	 res.on('data', function (data) {
-//         console.log(data.toString());
-//     });
-// });
-
-// req.end();
-
 var songs_id = [];   //定义专辑数组
 var groupedSongsId = [];
 
-//查询专辑id
+//查询歌曲id
 var selectData = function(db, callback) {  
   //连接到表  
   var collection = db.collection('songs');
@@ -37,19 +21,19 @@ var selectData = function(db, callback) {
     callback(result);
   });
 }
- 
+
+//连接数据库查询歌曲id
 MongoClient.connect(DB_CONN_STR, function(err, db) {
   console.log("连接成功！");
   selectData(db, function(result) {
     for (var i = 0; i < result.length; i++) {
     	songs_id.push(result[i].id);
     }
-    // songs_id.splice(0,40200);
-    // console.log(songs_id);
     db.close();
   });
 });
 
+//由于接口与代理不稳定，所以进行数组分割，便于查询
 function group(array, subGroupLength) {
     var index = 0;
     var newArray = [];
@@ -59,15 +43,14 @@ function group(array, subGroupLength) {
     }
     return newArray;
 }
-
+// -------------------------------------------------------------------------------
+// 爬虫4：根据歌曲id爬取歌曲中的热门评论和评论总数
+// -------------------------------------------------------------------------------
 var count = 0;
 setTimeout(function(){
 	setTimeout(function(){
 		groupedSongsId = group(songs_id, 500);
-		// console.log(groupedSongsId.length);
-		// -------------------------------------------------------------------------------
-		// 爬虫4：根据歌曲id爬取歌曲中的热门评论和评论总数
-		// -------------------------------------------------------------------------------
+		
 		setInterval(function(){
 			// var ss = Math.floor(songs_id.length / 44387* 10000) / 10000;
 			// console.log("                          进度  "+ (10000 - ss*10000) / 100 + "%");
@@ -127,7 +110,6 @@ function exectue_one_request( song_id ){
 				var data = JSON.parse(str);
 				data.id = song_id;
 				//歌曲评论信息简化，保留歌曲id，热门15条评论信息及评论总数
-				// console.log("歌曲评论信息正准备写入表comments......");
 				 
 				var insertData = function(db, callback) {  
 				    //连接到表 comment

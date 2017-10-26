@@ -15,7 +15,7 @@ function craw_top_artists_albums(){
        for (var x = 0; x < ta.top_artists_albumsize[z] / 30 + 1 ; x++) {
 
        		var req = http.request('http://localhost:3000/artist/album?id='+ ta.top_artists_id[z]+'&offset='+(x*30)+'&limit='+30 ,
-			// console.log('http://localhost:3000/artists?id='+ ta.top_artists_id[i]);
+			
 			function(res){
 				res.setEncoding('utf8');
 				var str = '';

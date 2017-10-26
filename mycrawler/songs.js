@@ -49,10 +49,6 @@ setTimeout(function(){
 			res.on('end', function () {
 				//字符串数据转json对象
 				var data = JSON.parse(str);
-				
-				// for (var j = 0; j < data.hotAlbums.length; j++) {
-				// 	albums_id.push(data.hotAlbums[j].id); 
-				// }
 
 				console.log("专辑歌曲信息正准备写入表songs......");
 				 
@@ -84,58 +80,3 @@ setTimeout(function(){
 }
 
 },3000);
-
-// function insert_songs( ){
-// 	if(insert_count <= count){
-// 		for (var x = insert_count * 400; x < 400 * (insert_count + 1); x ++) {
-// 			if(albums_id[x] != null) {
-// 				// console.log('http://localhost:3000/album?id='+ albums_id[x]);
-// 				var req = http.get('http://localhost:3000/album?id='+albums_id[x],
-// 				// console.log('http://localhost:3000/artists?id='+ ta.top_artists_id[i]);
-// 				function(res){
-// 					res.setEncoding('utf8');
-// 					var str = '';
-// 					res.on('data', function (chunk) {
-// 						str += chunk;
-// 					});
-
-// 					res.on('end', function () {
-// 						//字符串数据转json对象
-// 						var data = JSON.parse(str);
-						
-// 						// for (var j = 0; j < data.hotAlbums.length; j++) {
-// 						// 	albums_id.push(data.hotAlbums[j].id); 
-// 						// }
-
-// 						console.log("专辑歌曲信息正准备写入表songs......");
-						 
-// 						var insertData = function(db, callback) {  
-// 						    //连接到表 songs
-// 						    var collection = db.collection('songs1');
-// 						    //插入数据
-// 						    collection.insert(data.songs, function(err, result) { 
-// 						        if(err)
-// 						        {
-// 						            console.log('Error:'+ err);
-// 						            return;
-// 						        }     
-// 						        callback(result);
-// 						    });
-// 						}
-						 
-// 						MongoClient.connect(DB_CONN_STR, function(err, db) {
-// 						    console.log("连接成功！");
-// 						    insertData(db, function(result) {
-// 						        console.log(result);
-// 						        db.close();
-// 			   		        });
-// 			            });
-// 					});
-// 			});
-// 			req.end();
-// 			}  		                                       
-// 		}
-// 		insert_count++;
-// 	}	
-// }
-// setInterval( insert_songs, 30000);

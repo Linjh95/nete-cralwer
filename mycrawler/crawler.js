@@ -14,6 +14,3 @@ setTimeout(function() {
 
 //step2:爬取热门歌手所有专辑
 setTimeout( taa.craw_top_artists_albums , 5000);
-
-//step3:爬取所有专辑的歌曲
-// setTimeout( tas.craw_top_albums_songs , 20000);

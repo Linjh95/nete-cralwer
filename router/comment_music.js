@@ -25,15 +25,8 @@ const { createWebAPIRequestProxy } = require('../util/util')
 // })
 function randomProxyHost() {
   const proxyList = [
-    '111.13.109.27',                                                                                                                              
-    // '122.72.32.82',                                                                                                                              
-    // '114.80.182.132',                                                                                                                                                                                                                                                                                       
-    '107.21.56.41'                                                                                                                              
-    // '52.28.80.226',                                                               
-    // '52.77.209.208'                              
-    // '111.13.7.118', 
-    // '111.13.7.42'
-    // '111.13.7.122'           
+    '111.13.109.27',                                                                                                                                                                                                                                                                                                                                                                                                                    
+    '107.21.56.41'                                                                                                                                       
   ]
   const num = Math.floor(Math.random() * proxyList.length)
   console.log(proxyList[num])
